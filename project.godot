@@ -1,0 +1,29 @@
+; Engine configuration file.
+; Godot 4.5.1 - Pilgrimage Project
+; macOS Tahoe 26.1+ (arm64 Apple Silicon)
+
+config_version=5
+
+[application]
+
+config/name="Pilgrimage"
+config/version="0.1.0"
+config/description="A Journey-like atmospheric exploration game made with Godot 4.5.1"
+run/main_scene="res://scenes/main.tscn"
+config/features=PackedStringArray("4.5", "forward_plus")
+
+[debug]
+
+gdscript/warnings/unused_variable=1
+gdscript/warnings/unused_argument=1
+
+[filesystem]
+
+import/blending_mode_for_png=1
+
+[rendering]
+
+renderer/rendering_method="forward_plus"
+textures/default_filters/use_nearest=false
+textures/vram_compression/import_bptc_astc=true
+
