@@ -16,9 +16,6 @@ extends CharacterBody2D
 @export var acceleration: float = 1000.0   # Accelerazione (pixels/sec²)
 @export var friction: float = 800.0        # Decelerazione (pixels/sec²)
 
-# === INTERNAL VARIABLES ===
-var velocity: Vector2 = Vector2.ZERO       # Velocità attuale
-
 # ========================================
 # PROCESS LOOP - Eseguito ogni frame
 # ========================================
@@ -54,10 +51,6 @@ func _input(event: InputEvent) -> void:
 # ========================================
 # UTILITY FUNCTIONS
 # ========================================
-
-## Restituisce la velocità attuale
-func get_velocity() -> Vector2:
-	return velocity
 
 ## Restituisce la direzione di movimento normalizzata
 func get_direction() -> Vector2:
