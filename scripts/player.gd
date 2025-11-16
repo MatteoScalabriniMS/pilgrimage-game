@@ -5,21 +5,19 @@ extends CharacterBody2D
 # ========================================
 # Gestisce il movimento del personaggio
 # Input: WASD o Frecce direzionali
-# Output: Movimento fluido con accelerazione/friction
 # 
 # Versione: 0.1.0
 # Godot: 4.5.1
 
 # === EXPORTED VARIABLES ===
-# Questi possono essere modificati in Inspector
 @export var speed: float = 200.0           # Velocità massima (pixels/sec)
 @export var acceleration: float = 1000.0   # Accelerazione (pixels/sec²)
 @export var friction: float = 800.0        # Decelerazione (pixels/sec²)
 
 # ========================================
-# PROCESS LOOP - Eseguito ogni frame
+# PHYSICS PROCESS - Eseguito ogni physics frame
 # ========================================
-func _process(delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	# Leggi input da tastiera (WASD o Frecce)
 	var input_vector = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
 	
@@ -31,8 +29,8 @@ func _process(delta: float) -> void:
 		# Niente input: decelerazione fluida verso fermo
 		velocity = velocity.move_toward(Vector2.ZERO, friction * delta)
 	
-	# Applica movimento alla posizione
-	position += velocity * delta
+	# IMPORTANTE: usa move_and_slide() per CharacterBody2D
+	move_and_slide()
 
 # ========================================
 # INPUT DETECTION - Quando l'utente preme tasti
@@ -42,7 +40,7 @@ func _input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed:
 		# SPAZIO: test debug
 		if event.keycode == KEY_SPACE:
-			print("SPACE - Player position: ", position)
+			print("SPACE - Player position: ", global_position)
 		
 		# ESCAPE: esci dal gioco (utile per testing)
 		if event.keycode == KEY_ESCAPE:

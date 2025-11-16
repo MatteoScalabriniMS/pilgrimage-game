@@ -1,0 +1,56 @@
+[gd_scene load_steps=8 format=3 uid="uid://dfqhpsyhq6g01"]
+
+[ext_resource type="Texture2D" uid="uid://co17uotxnn181" path="res://assets/sprites/white_1920x1080.png" id="1_w8tvy"]
+[ext_resource type="Texture2D" uid="uid://c3c4oxklgg51d" path="res://assets/sprites/white_1920x800.png" id="2_74ec5"]
+[ext_resource type="Texture2D" uid="uid://dwyj2p4vu7vtt" path="res://assets/sprites/white_1920x600.png" id="3_6v7m0"]
+[ext_resource type="Texture2D" uid="uid://cedjbjal3q1q4" path="res://assets/sprites/white_1920x400.png" id="4_a037a"]
+[ext_resource type="Script" uid="uid://bdjhqgruem7sd" path="res://scripts/player.gd" id="5_6v7m0"]
+[ext_resource type="Texture2D" uid="uid://dqorip563m1oc" path="res://assets/sprites/player_placeholder.png" id="6_a037a"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_msjfa"]
+
+[node name="DesertEnvironment" type="Node2D"]
+
+[node name="Sky_Parallax" type="Parallax2D" parent="."]
+scroll_scale = Vector2(0.1, 0.1)
+repeat_size = Vector2(1920, 0)
+
+[node name="Sky_Sprite" type="Sprite2D" parent="Sky_Parallax"]
+modulate = Color(1, 0.78431374, 0.5882353, 1)
+texture = ExtResource("1_w8tvy")
+
+[node name="FarDunes_Parallax" type="Parallax2D" parent="."]
+scroll_scale = Vector2(0.3, 0.3)
+repeat_size = Vector2(1920, 0)
+
+[node name="FarDunes_Sprite" type="Sprite2D" parent="FarDunes_Parallax"]
+modulate = Color(0.9019608, 0.5882353, 0.3137255, 1)
+texture = ExtResource("2_74ec5")
+
+[node name="MidDunes_Parallax" type="Parallax2D" parent="."]
+scroll_scale = Vector2(0.6, 0.6)
+repeat_size = Vector2(1920, 0)
+
+[node name="MidDunes_Sprite" type="Sprite2D" parent="MidDunes_Parallax"]
+modulate = Color(0.78431374, 0.47058824, 0.19607843, 1)
+texture = ExtResource("3_6v7m0")
+
+[node name="NearDunes_Parallax" type="Parallax2D" parent="."]
+scroll_scale = Vector2(0.9, 0.9)
+repeat_size = Vector2(1920, 0)
+
+[node name="NearDunes_Sprite" type="Sprite2D" parent="NearDunes_Parallax"]
+modulate = Color(0.7058824, 0.39215687, 0.15686275, 1)
+texture = ExtResource("4_a037a")
+
+[node name="Player" type="CharacterBody2D" parent="."]
+script = ExtResource("5_6v7m0")
+speed = 2000.0
+
+[node name="Sprite" type="Sprite2D" parent="Player"]
+texture = ExtResource("6_a037a")
+
+[node name="Collision" type="CollisionShape2D" parent="Player"]
+shape = SubResource("RectangleShape2D_msjfa")
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
