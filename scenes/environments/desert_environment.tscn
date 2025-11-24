@@ -1,6 +1,6 @@
-[gd_scene load_steps=8 format=3 uid="uid://dfqhpsyhq6g01"]
+[gd_scene load_steps=11 format=3 uid="uid://dfqhpsyhq6g01"]
 
-[ext_resource type="Texture2D" uid="uid://co17uotxnn181" path="res://assets/sprites/white_1920x1080.png" id="1_w8tvy"]
+[ext_resource type="Texture2D" uid="uid://cuqghd1yx2a08" path="res://assets/environments/desert/desert_sky_v1.png" id="1_6v7m0"]
 [ext_resource type="Texture2D" uid="uid://c3c4oxklgg51d" path="res://assets/sprites/white_1920x800.png" id="2_74ec5"]
 [ext_resource type="Texture2D" uid="uid://dwyj2p4vu7vtt" path="res://assets/sprites/white_1920x600.png" id="3_6v7m0"]
 [ext_resource type="Texture2D" uid="uid://cedjbjal3q1q4" path="res://assets/sprites/white_1920x400.png" id="4_a037a"]
@@ -8,6 +8,28 @@
 [ext_resource type="Texture2D" uid="uid://dqorip563m1oc" path="res://assets/sprites/player_placeholder.png" id="6_a037a"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_msjfa"]
+
+[sub_resource type="Gradient" id="Gradient_6v7m0"]
+offsets = PackedFloat32Array(0.373444, 0.81051177)
+colors = PackedColorArray(0.7058824, 0.39215687, 0.15686275, 1, 1, 0.89411765, 0.8, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_a037a"]
+gradient = SubResource("Gradient_6v7m0")
+width = 10
+height = 10
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_6v7m0"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(1000, 600, 0)
+direction = Vector3(1, -0.1, 0)
+spread = 15.0
+initial_velocity_min = 20.0
+initial_velocity_max = 50.0
+gravity = Vector3(0, 5, 0)
+scale_min = 0.5
+scale_max = 2.0
+color = Color(0.9607843, 0.87058824, 0.7019608, 0.64705884)
 
 [node name="DesertEnvironment" type="Node2D"]
 
@@ -17,9 +39,10 @@ repeat_size = Vector2(1920, 0)
 
 [node name="Sky_Sprite" type="Sprite2D" parent="Sky_Parallax"]
 modulate = Color(1, 0.78431374, 0.5882353, 1)
-texture = ExtResource("1_w8tvy")
+texture = ExtResource("1_6v7m0")
 
 [node name="FarDunes_Parallax" type="Parallax2D" parent="."]
+visible = false
 scroll_scale = Vector2(0.3, 0.3)
 repeat_size = Vector2(1920, 0)
 
@@ -28,6 +51,7 @@ modulate = Color(0.9019608, 0.5882353, 0.3137255, 1)
 texture = ExtResource("2_74ec5")
 
 [node name="MidDunes_Parallax" type="Parallax2D" parent="."]
+visible = false
 scroll_scale = Vector2(0.6, 0.6)
 repeat_size = Vector2(1920, 0)
 
@@ -36,6 +60,7 @@ modulate = Color(0.78431374, 0.47058824, 0.19607843, 1)
 texture = ExtResource("3_6v7m0")
 
 [node name="NearDunes_Parallax" type="Parallax2D" parent="."]
+visible = false
 scroll_scale = Vector2(0.9, 0.9)
 repeat_size = Vector2(1920, 0)
 
@@ -54,3 +79,22 @@ texture = ExtResource("6_a037a")
 shape = SubResource("RectangleShape2D_msjfa")
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
+position = Vector2(-4, 0)
+limit_left = -957
+limit_top = -545
+limit_bottom = 542
+position_smoothing_enabled = true
+drag_horizontal_enabled = true
+drag_vertical_enabled = true
+
+[node name="SandParticles" type="GPUParticles2D" parent="Player/Camera2D"]
+position = Vector2(43, -3)
+amount = 150
+texture = SubResource("GradientTexture2D_a037a")
+lifetime = 8.0
+preprocess = 2.0
+randomness = 0.2
+process_material = SubResource("ParticleProcessMaterial_6v7m0")
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+color = Color(1, 0.89411765, 0.8, 1)

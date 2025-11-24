@@ -1,8 +1,8 @@
 # 🎮 Pilgrimage - Setup Guide for macOS (Godot 4.5.1)
 
-**Versione:** 0.1.0  
-**Engine:** Godot 4.5.1 (arm64 Apple Silicon)  
-**macOS:** Tahoe 26.1+  
+**Versione:** 0.1.0
+**Engine:** Godot 4.5.1 (arm64 Apple Silicon)
+**macOS:** Tahoe 26.1+
 **Tempo stimato:** ~20 minuti
 
 ---
@@ -10,10 +10,11 @@
 ## ✅ PRE-REQUISITI
 
 Hai già fatto questi step? ✓
-- [ ] Scaricato Godot 4.5.1 arm64 in `~/Applications`
-- [ ] Scaricato Krita in `~/Applications`
-- [ ] Creata la cartella `~/Documents/PERSONAL_PROJECTS/GODOT/Pilgrimage`
-- [ ] Git installato (`git --version` funziona)
+
+- [X] Scaricato Godot 4.5.1 arm64 in `~/Applications`
+- [X] Scaricato Krita in `~/Applications`
+- [X] Creata la cartella `~/Documents/PERSONAL_PROJECTS/GODOT/Pilgrimage`
+- [X] Git installato (`git --version` funziona)
 
 ---
 
@@ -94,6 +95,7 @@ Sotto il node "Main", aggiungi:
    - **CollisionShape2D** → rinomina in "Collision"
 
 **Struttura final:**
+
 ```
 Main (Node2D)
 └── Player (CharacterBody2D)
@@ -106,6 +108,7 @@ Main (Node2D)
 ## 🎨 STEP 5: Crea un placeholder visivo
 
 **Per il Sprite:**
+
 1. Seleziona il node "Sprite" (dentro Player)
 2. Nel pannello Inspector (destra), trova **Texture**
 3. Clicca su **[empty]** → **New Image Texture**
@@ -115,6 +118,7 @@ Main (Node2D)
 7. Clicca **Create** → salva come `assets/sprites/player_placeholder.png`
 
 **Per il Collision:**
+
 1. Seleziona "Collision" node
 2. Inspector → **Shape**
 3. Clicca **[empty]** → **New RectangleShape2D**
@@ -140,12 +144,12 @@ extends CharacterBody2D
 
 func _process(delta: float) -> void:
 	var input_vector = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
-	
+
 	if input_vector != Vector2.ZERO:
 		velocity = velocity.move_toward(input_vector * speed, acceleration * delta)
 	else:
 		velocity = velocity.move_toward(Vector2.ZERO, friction * delta)
-	
+
 	position += velocity * delta
 
 func _input(event: InputEvent) -> void:
@@ -166,6 +170,7 @@ func _input(event: InputEvent) -> void:
 4. Premi **ESC** per fermare il gioco
 
 **Se non funziona:**
+
 - Controlla che "Player" sia selezionato quando allega lo script
 - Verifica che il codice non abbia errori di sintassi (check nella tab "Output" in basso)
 
@@ -183,6 +188,7 @@ func _input(event: InputEvent) -> void:
 ## 💾 Commit iniziale
 
 Nel Terminale:
+
 ```bash
 cd ~/Documents/PERSONAL_PROJECTS/GODOT/Pilgrimage/pilgrimage-game
 git add .
@@ -196,15 +202,18 @@ git push -u origin main
 ## ⚠️ TROUBLESHOOTING
 
 ### Godot non si apre
+
 - Controlla che sia **arm64** (non x86_64 Intel)
 - Terminale: `file ~/Applications/Godot.app/Contents/MacOS/Godot`
 - Output deve contenere: `Mach-O 64-bit executable arm64`
 
 ### Script non si salva
-- Vai in **Project → Project Settings → File System** 
+
+- Vai in **Project → Project Settings → File System**
 - Controlla che `res://` punti alla cartella giusta
 
 ### Player non si muove
+
 - Controlla che Input Map abbia `ui_left`, `ui_right`, `ui_up`, `ui_down`
 - Menu: **Project → Project Settings → Input Map**
 
@@ -213,6 +222,7 @@ git push -u origin main
 ## 📚 Prossimi passi
 
 **Domani continueremo con:**
+
 1. ✅ Placeholder art in Krita
 2. ✅ Sistema parallax per background
 3. ✅ Primo ambiente (Desert of Echoes)

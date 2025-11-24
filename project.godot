@@ -13,7 +13,7 @@ config_version=5
 config/name="Pilgrimage"
 config/description="A Journey-like atmospheric exploration game made with Godot 4.5.1"
 config/version="0.1.0"
-run/main_scene="res://scenes/main.tscn"
+run/main_scene="uid://dfqhpsyhq6g01"
 config/features=PackedStringArray("4.5")
 
 [debug]
